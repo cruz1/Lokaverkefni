@@ -1,0 +1,213 @@
+/*
+    Add transition to containers so they can push in and out.
+*/
+#navMenu,  /* ->skipti út heitinu #layout  */
+#menu,
+.menu-link {
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+/*
+    #navMenu is the parent <element> that contains the menu area.
+*/
+#navMenu {
+    position: relative;
+    padding-left: 0;
+}
+    #navMenu.active {
+        position: relative;
+        left: 100%; /*var 150 */
+    }
+    #navMenu.active #menu {
+        left: 100%;   /*var 150 */
+        width: 100%; /*var 150 */
+        height: 3em; /*nýtt*/
+    }
+
+    #navMenu.active .menu-link {
+        left: 80%;  /*var 150 */
+    }
+
+/*
+    The `#menu` `<div>` is the parent `<div>` that contains the 
+    `.pure-menu` that appears on top side of the page.
+*/
+
+#menu {
+    margin-left: -110%; /*ATH! var-150px; "#menu" width */
+    padding-left: 10%;
+    width: 100%; /*var 150 */
+    height: 2.8em; /*nýtt*/
+    position: fixed;
+    top: 0;
+    left: 0;
+/*    bottom: 0;*/
+    z-index: 100; /* so the menu or its navicon stays above all content */
+    background: #191818;
+    /*overflow-y: auto;
+    -webkit-overflow-scrolling: touch;*/
+}
+/*
+    All anchors inside the menu should be styled like this.
+*/
+    #menu a {
+        display: block; /*nýtt*/
+        color: #ccc;
+        border: none;
+        padding: 0.6em 1.2em;
+    }
+
+/*
+    Remove all background/borders, since we are applying them to #menu.
+*/
+     #menu .pure-menu,
+     #menu .pure-menu ul {
+        border: none;
+        background: #191818; /*transparent;*/
+    }
+/*  -----------------------  Nýtt stuff ath +48em*/
+    #menu .pure-menu ul {
+        width: 100%;
+    }
+    #menu .pure-menu ul li{
+        display: block;
+        border: 1px solid blue;
+        text-align: center;
+    }
+    #menu .pure-menu ul li { 
+        color: #ddd;
+        padding: 0 1em;
+    }
+/*  titill */
+    #menu .pure-menu ul li.logo { 
+        color: #fff;
+        padding: .5em;
+        font-weight: bold;
+        font-size: 1em;
+        background: #444;
+    }
+/*  ----------------------- */
+
+/*  Add that light border to separate items into groups.  ??
+*/
+    #menu .pure-menu ul,
+    #menu .pure-menu .menu-item-divided {
+        border-top: 1px solid #333;
+    }
+        /*
+        Change color of the anchor links on hover/focus.
+        */
+        #menu .pure-menu li a:hover,
+        #menu .pure-menu li a:focus {
+            background: #555;
+            color: #fff;
+        }
+
+    /*
+    This styles the selected menu item `<li>`.
+    */
+    #menu .pure-menu-selected,
+    #menu .pure-menu-heading {
+        background: #1f8dd6;
+    }
+        /*
+        This styles a link within a selected menu item `<li>`.
+        */
+        #menu .pure-menu-selected a {
+            color: #fff;
+        }
+
+    /*
+    This styles the menu heading.
+    */
+    #menu .pure-menu-heading {
+        font-size: 110%;
+        color: #fff;
+        margin: 0;
+    }
+
+/*  Dynamic Button For Responsive Menu 
+    The button to open/close the Menu is custom-made and not part of Pure. Here's how it works:
+
+    .menu-link` represents the responsive menu toggle that shows/hides on small screens.
+*/
+.menu-link {
+    position: fixed;
+    display: block; /* show this only on small screens */
+    top: 0;
+    left: 0; /* "#menu width" */
+    background: #000;
+    background: rgba(0,0,0,0.7);
+    font-size: .9em; /* 12px change this value to increase/decrease button size */
+    z-index: 1000;
+    width: 1.6em;
+    height: auto;
+    padding: 1.7em 1.4em;
+}
+
+    .menu-link:hover,
+    .menu-link:focus {
+        background: #000;
+    }
+
+    .menu-link span {
+        position: relative;
+        display: block;
+    }
+
+    .menu-link span,
+    .menu-link span:before,
+    .menu-link span:after {
+        background-color: #fff;
+        width: 2em;
+        height: 0.2em;
+    }
+
+        .menu-link span:before,
+        .menu-link span:after {
+            position: absolute;
+            margin-top: -0.6em;
+            content: " ";
+        }
+
+        .menu-link span:after {
+            margin-top: 0.6em;
+        }
+
+
+/* -- Responsive Styles (Media Queries) ------------------------------------- */
+@media (min-width: 30em) {
+        #navMenu.active .menu-link {
+            left: 90%;  
+        }
+    }
+/*
+    birtir the #navMenu at `48em`+
+*/
+@media (min-width: 48em) {
+
+    #navMenu {
+        margin-left: 100%; /* "#navMenu" færist frá -110% */
+        left: 0;
+    }
+    #menu {
+        left: 100%; 
+    }
+    .menu-link {
+        display: none;   /*menu hverfur */
+    }
+
+
+    /*------------------------------nýtt*/
+
+    #menu .pure-menu ul {
+        width: 100%;
+    }
+    #menu .pure-menu ul li{
+        display: inline-block;  /*li er ekki lengra en innihald, nema það sé tekið fram hér */
+        border: 0;
+    }
+}
